@@ -110,7 +110,9 @@ function App() {
               <span>2017</span>
               <span className="flex items-center justify-center">
                 7.4
-                <AiFillStar color="#FFFF00" />
+                <span className="icon">
+                  <AiFillStar color="#FFFF00" />
+                </span>
               </span>
             </div>
             <button className="flex items-center justify-center px-6 py-3 capitalize w-full bg-primary rounded-lg">
