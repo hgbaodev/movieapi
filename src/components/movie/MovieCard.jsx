@@ -1,8 +1,10 @@
 /* eslint-disable react/prop-types */
 import { AiFillPlayCircle, AiFillStar } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
 
 const MovieCard = ({ item }) => {
-  const { title, vote_average, poster_path, release_date } = item;
+  const { title, vote_average, poster_path, release_date, id } = item;
+  const navigate = useNavigate();
   return (
     <div className="movie-card flex flex-col rounded-lg p-3 bg-slate-800 te-800 h-full select-none">
       <img
@@ -19,7 +21,12 @@ const MovieCard = ({ item }) => {
             <AiFillStar color="#FFD700" />
           </span>
         </div>
-        <button className="flex items-center justify-center px-6 py-3 capitalize w-full bg-primary rounded-lg mt-auto">
+        <button
+          onClick={() => {
+            navigate(`/movie/${id}`);
+          }}
+          className="flex items-center justify-center px-6 py-3 capitalize w-full bg-primary rounded-lg mt-auto"
+        >
           Watch now
           <span className="icon px-2 py-2 text-2xl">
             <AiFillPlayCircle />

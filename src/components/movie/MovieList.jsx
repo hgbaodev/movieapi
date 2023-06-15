@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { SwiperSlide, Swiper } from "swiper/react";
-import useSWR from "swr";
 import "swiper/scss";
+import useSWR from "swr";
 import MovieCard from "./MovieCard";
 import { useEffect, useState } from "react";
 import { fetcher } from "../../config";
