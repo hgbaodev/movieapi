@@ -4,7 +4,7 @@ import { AiFillPlayCircle, AiFillStar } from "react-icons/ai";
 const MovieCard = ({ item }) => {
   const { title, vote_average, poster_path, release_date } = item;
   return (
-    <div className="movie-card flex flex-col rounded-lg p-3 bg-slate-800 h-full select-none">
+    <div className="movie-card flex flex-col rounded-lg p-3 bg-slate-800 te-800 h-full select-none">
       <img
         src={`https://image.tmdb.org/t/p/w500/${poster_path}`}
         alt=""
