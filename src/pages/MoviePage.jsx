@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import MovieCard from "../components/movie/MovieCard";
-import { apiKey, fetcher } from "../config";
+import { fetcher, tmdbAPI } from "../config";
 import useSWR from "swr";
 import useDebounce from "../hooks/useDebounce";
 import ReactPaginate from "react-paginate";
@@ -12,9 +12,7 @@ const MoviePage = () => {
   const [pageCount, setPageCount] = useState(0);
   const [nextPage, setNextPage] = useState(1);
   const [filter, setFilter] = useState("");
-  const [url, setUrl] = useState(
-    `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&page='${nextPage}'`
-  );
+  const [url, setUrl] = useState(tmdbAPI.getMovieList("popular", nextPage));
   const handleFilterChange = (e) => {
     setFilter(e.target.value);
   };
@@ -27,13 +25,9 @@ const MoviePage = () => {
 
   useEffect(() => {
     if (filterDebounce) {
-      setUrl(
-        `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query='${filterDebounce}'&page=${nextPage}`
-      );
+      setUrl(tmdbAPI.getMovieSearch(filterDebounce, nextPage));
     } else {
-      setUrl(
-        `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&page=${nextPage}`
-      );
+      setUrl(tmdbAPI.getMovieList("popular", nextPage));
     }
   }, [filterDebounce, nextPage]);
 
@@ -47,7 +41,6 @@ const MoviePage = () => {
   }, [data]);
 
   const handlePageClick = (event) => {
-    // const newOffset = (event.selected * itemsPerPage) % data.total_pages;
     setNextPage(event.selected + 1);
   };
 
@@ -62,7 +55,7 @@ const MoviePage = () => {
             onChange={handleFilterChange}
           />
         </div>
-        <button className="p-4 bg-primary text-white rounded-lg">
+        <button className="p-4 bg-secondary text-white rounded-lg">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"

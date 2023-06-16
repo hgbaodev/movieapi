@@ -5,6 +5,7 @@ import "swiper/scss";
 import useSWR from "swr";
 import { fetcher } from "../../config";
 import { useNavigate } from "react-router-dom";
+import Button from "../button/Button";
 
 const Banner = () => {
   const { data } = useSWR(
@@ -52,17 +53,18 @@ function BannerItem({ item }) {
             Drama
           </span>
         </div>
-        <button
+        <Button
           onClick={() => {
             navigate(`/movie/${id}`);
           }}
-          className="flex items-center px-6 py-3 bg-primary rounded-lg font-medium"
+          bgColor="secondary"
+          className="font-medium"
         >
           Watch
           <span className="icon px-2 py-2 text-2xl">
             <AiFillPlayCircle />
           </span>
-        </button>
+        </Button>
       </div>
     </div>
   );

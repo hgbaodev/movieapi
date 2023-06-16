@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { useParams } from "react-router-dom";
 import useSWR from "swr";
-import { apiKey, fetcher } from "../config";
+import { apiKey, fetcher, tmdbAPI } from "../config";
 import { SwiperSlide, Swiper } from "swiper/react";
 import "swiper/scss";
 import MovieCard from "../components/movie/MovieCard";
@@ -9,10 +9,7 @@ import MovieCard from "../components/movie/MovieCard";
 //https://api.themoviedb.org/3/movie/{movie_id}?api_key=1718e7ca64d06a5129a10f58a692999e
 const MovieDetailsPage = () => {
   const { movieId } = useParams();
-  const { data, error } = useSWR(
-    `https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}`,
-    fetcher
-  );
+  const { data, error } = useSWR(tmdbAPI.getMovieDetail(movieId), fetcher);
 
   if (!data) return null;
   const { backdrop_path, poster_path, title, genres, overview } = data;
@@ -24,13 +21,13 @@ const MovieDetailsPage = () => {
         <div
           className="w-full h-full bg-cover bg-no-repeat"
           style={{
-            backgroundImage: `url(https://image.tmdb.org/t/p/original/${backdrop_path})`,
+            backgroundImage: `url(${tmdbAPI.getImageOriginal(backdrop_path)})`,
           }}
         ></div>
       </div>
       <div className="w-full h-[400px] max-w-[800px] mx-auto -mt-[200px] relative z-10 pb-10">
         <img
-          src={`https://image.tmdb.org/t/p/original/${poster_path}`}
+          src={`${tmdbAPI.getImageOriginal(poster_path)}`}
           alt=""
           className="w-full h-full object-cover rounded-xl"
         />
@@ -63,7 +60,7 @@ const MovieDetailsPage = () => {
 function MovieCredits() {
   const { movieId } = useParams();
   const { data, error } = useSWR(
-    `https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=${apiKey}`,
+    tmdbAPI.getMovieInfos("credits", movieId),
     fetcher
   );
   if (!data) return null;
@@ -77,7 +74,7 @@ function MovieCredits() {
           {cast.slice(0, 4).map((item) => (
             <div key={item.id} className="cast-item">
               <img
-                src={`https://image.tmdb.org/t/p/original/${item.profile_path}`}
+                src={tmdbAPI.getImageOriginal(item.profile_path)}
                 className="w-full h-[350px] object-cover rounded-lg mb-3"
                 alt=""
               />
@@ -91,12 +88,11 @@ function MovieCredits() {
     </>
   );
 }
-//<iframe width="1280" height="720" src="https://www.youtube.com/embed/xqe3eCzRkvs" title="Điều gì &quot;good boy&quot; nên biết KHI ĐI TÁN GÁI?  | Limitless | YÊU" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 function MovieVideos() {
   const { movieId } = useParams();
   const { data, error } = useSWR(
-    `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${apiKey}`,
+    tmdbAPI.getMovieInfos("videos", movieId),
     fetcher
   );
   if (!data) return null;
@@ -127,13 +123,12 @@ function MovieVideos() {
 function MovieSimilar() {
   const { movieId } = useParams();
   const { data, error } = useSWR(
-    `https://api.themoviedb.org/3/movie/${movieId}/similar?api_key=${apiKey}`,
+    tmdbAPI.getMovieInfos("similar", movieId),
     fetcher
   );
   if (!data) return null;
   const { results } = data;
   if (results.length < 0) return null;
-  console.log(results);
   return (
     <div className="py-10">
       <h2 className="text-3xl font-medium mb-10 text-white text-center">

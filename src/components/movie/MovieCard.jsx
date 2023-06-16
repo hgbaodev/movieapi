@@ -1,6 +1,8 @@
 /* eslint-disable react/prop-types */
 import { AiFillPlayCircle, AiFillStar } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
+import Button from "../button/Button";
+import { tmdbAPI } from "../../config";
 
 const MovieCard = ({ item }) => {
   const { title, vote_average, poster_path, release_date, id } = item;
@@ -8,7 +10,7 @@ const MovieCard = ({ item }) => {
   return (
     <div className="movie-card flex flex-col rounded-lg p-3 bg-slate-800 te-800 h-full select-none">
       <img
-        src={`https://image.tmdb.org/t/p/w500/${poster_path}`}
+        src={tmdbAPI.getImage500(poster_path)}
         alt=""
         className="w-full h-[250px] object-cover rounded-lg mb-5"
       />
@@ -21,17 +23,17 @@ const MovieCard = ({ item }) => {
             <AiFillStar color="#FFD700" />
           </span>
         </div>
-        <button
+        <Button
           onClick={() => {
             navigate(`/movie/${id}`);
           }}
-          className="flex items-center justify-center px-6 py-3 capitalize w-full bg-primary rounded-lg mt-auto"
+          bgColor="secondary"
         >
           Watch now
           <span className="icon px-2 py-2 text-2xl">
             <AiFillPlayCircle />
           </span>
-        </button>
+        </Button>
       </div>
     </div>
   );

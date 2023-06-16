@@ -28,7 +28,7 @@
   justify-content: center;
   gap: 20px;
   .selected {
-    @apply text-primary;
+    @apply text-white bg-secondary;
   }
   li {
     padding: 4px 8px;
