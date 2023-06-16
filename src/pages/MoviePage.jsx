@@ -3,11 +3,13 @@ import MovieCard from "../components/movie/MovieCard";
 import { apiKey, fetcher } from "../config";
 import useSWR from "swr";
 import useDebounce from "../hooks/useDebounce";
+import ReactPaginate from "react-paginate";
 // |
 
-const pageCount = 5;
+const itemsPerPage = 20;
 
 const MoviePage = () => {
+  const [pageCount, setPageCount] = useState(0);
   const [nextPage, setNextPage] = useState(1);
   const [filter, setFilter] = useState("");
   const [url, setUrl] = useState(
@@ -26,17 +28,28 @@ const MoviePage = () => {
   useEffect(() => {
     if (filterDebounce) {
       setUrl(
-        `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query='${filterDebounce}'&page='${nextPage}'`
+        `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query='${filterDebounce}'&page=${nextPage}`
       );
     } else {
       setUrl(
-        `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&page='${nextPage}'`
+        `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&page=${nextPage}`
       );
     }
   }, [filterDebounce, nextPage]);
 
   const movies = data?.results || [];
-  // const { page, total_pages } = data;
+  console.log(url);
+
+  useEffect(() => {
+    if (!data || !data.total_results) return;
+    setPageCount(Math.ceil(data.total_results / itemsPerPage));
+    return () => {};
+  }, [data]);
+
+  const handlePageClick = (event) => {
+    // const newOffset = (event.selected * itemsPerPage) % data.total_pages;
+    setNextPage(event.selected + 1);
+  };
 
   return (
     <div className="py-10 page-container">
@@ -76,54 +89,17 @@ const MoviePage = () => {
             <MovieCard key={item.id} item={item}></MovieCard>
           ))}
       </div>
-      <div className="flex items-center justify-center mt-10 gap-x-5">
-        <span
-          className="cursor-pointer"
-          onClick={() => setNextPage(nextPage + 1)}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth="1.5"
-            stroke="currentColor"
-            className="w-6 h-6"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"
-            />
-          </svg>
-        </span>
-        {new Array(pageCount).fill(0).map((item, index) => (
-          <span
-            key={item.id}
-            className="cursor-pointer inline-block py-2 px-4 leading-none rounded-lg bg-white text-slate-900"
-            onClick={() => setNextPage(index + 1)}
-          >
-            {index + 1}
-          </span>
-        ))}
-        <span
-          className="cursor-pointer"
-          onClick={() => setNextPage(nextPage + 1)}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth="1.5"
-            stroke="currentColor"
-            className="w-6 h-6"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
-            />
-          </svg>
-        </span>
+      <div className="mt-10">
+        <ReactPaginate
+          breakLabel="..."
+          nextLabel=">>"
+          onPageChange={handlePageClick}
+          pageRangeDisplayed={5}
+          pageCount={pageCount}
+          previousLabel="<<"
+          renderOnZeroPageCount={null}
+          className="pagination"
+        />
       </div>
     </div>
   );

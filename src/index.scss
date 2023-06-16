@@ -21,3 +21,21 @@
     height: 100%;
   }
 }
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  .selected {
+    @apply text-primary;
+  }
+  li {
+    padding: 4px 8px;
+    background: white;
+    display: inline-block;
+    cursor: pointer;
+    border-radius: 8px;
+    color: rgb(51, 65, 85);
+  }
+}
