@@ -27,10 +27,10 @@
   align-items: center;
   justify-content: center;
   gap: 20px;
-  .selected {
+  .selected a {
     @apply text-white bg-secondary;
   }
-  li {
+  li a {
     padding: 4px 8px;
     background: white;
     display: inline-block;

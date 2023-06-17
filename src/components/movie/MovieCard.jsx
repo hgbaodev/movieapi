@@ -1,8 +1,10 @@
-/* eslint-disable react/prop-types */
+/* eslint-disable react-refresh/only-export-components */
 import { AiFillPlayCircle, AiFillStar } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import Button from "../button/Button";
 import { tmdbAPI } from "../../config";
+import PropTypes from "prop-types";
+import { withErrorBoundary } from "react-error-boundary";
 
 const MovieCard = ({ item }) => {
   const { title, vote_average, poster_path, release_date, id } = item;
@@ -39,4 +41,24 @@ const MovieCard = ({ item }) => {
   );
 };
 
-export default MovieCard;
+MovieCard.propTypes = {
+  item: PropTypes.shape({
+    title: PropTypes.string,
+    vote_average: PropTypes.number,
+    poster_path: PropTypes.string,
+    release_date: PropTypes.string,
+    id: PropTypes.number,
+  }),
+};
+
+function FallbackComponent() {
+  return (
+    <p className="bg-red-50 text-red-400">
+      Something went wrong with this component
+    </p>
+  );
+}
+
+export default withErrorBoundary(MovieCard, {
+  FallbackComponent
+});

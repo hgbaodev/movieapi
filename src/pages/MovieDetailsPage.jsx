@@ -57,6 +57,12 @@ const MovieDetailsPage = () => {
   );
 };
 
+function MovieMeta(type = "credits") {
+  const { movieId } = useParams();
+  const { data, error } = useSWR(tmdbAPI.getMovieInfos(type, movieId), fetcher);
+  if (!data) return null;
+}
+
 function MovieCredits() {
   const { movieId } = useParams();
   const { data, error } = useSWR(

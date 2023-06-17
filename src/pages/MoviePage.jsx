@@ -73,7 +73,7 @@ const MoviePage = () => {
         </button>
       </div>
       {loading && (
-        <div className="w-10 h-10 rounded-full  border-4 border-primary border-t-transparent border-t-4 mx-auto animate-spin"></div>
+        <div className="w-10 h-10 rounded-full  border-4 border-secondary border-t-transparent border-t-4 mx-auto animate-spin"></div>
       )}
       <div className="grid grid-cols-4 gap-10">
         {!loading &&
