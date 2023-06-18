@@ -85,18 +85,6 @@ const Header = () => {
           />
         </div>
       </div>
-      {/* <NavLink
-        to="/"
-        className={({ isActive }) => (isActive ? "text-secondary" : "")}
-      >
-        Home
-      </NavLink>
-      <NavLink
-        to="/movies"
-        className={({ isActive }) => (isActive ? "text-secondary" : "")}
-      >
-        Movies
-      </NavLink> */}
     </header>
   );
 };

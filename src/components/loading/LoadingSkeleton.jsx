@@ -1,4 +1,4 @@
-/* eslint-disable react/prop-types */
+import PropTypes from "prop-types";
 const LoadingSkeleton = (props) => {
   return (
     <div
@@ -10,6 +10,13 @@ const LoadingSkeleton = (props) => {
       }}
     ></div>
   );
+};
+
+LoadingSkeleton.propTypes = {
+  className: PropTypes.string,
+  height: PropTypes.string,
+  width: PropTypes.string,
+  radius: PropTypes.string,
 };
 
 export default LoadingSkeleton;
