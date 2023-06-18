@@ -7,6 +7,7 @@ import PropTypes from "prop-types";
 import { withErrorBoundary } from "react-error-boundary";
 import LoadingSkeleton from "../loading/LoadingSkeleton";
 
+
 const MovieCard = ({ item }) => {
   const { title, vote_average, poster_path, release_date, id } = item;
   const navigate = useNavigate();

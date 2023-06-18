@@ -1,10 +1,11 @@
 /* eslint-disable no-unused-vars */
 import { useParams } from "react-router-dom";
 import useSWR from "swr";
-import { apiKey, fetcher, tmdbAPI } from "../config";
+import { fetcher, tmdbAPI } from "../config";
 import { SwiperSlide, Swiper } from "swiper/react";
 import "swiper/scss";
 import MovieCard from "../components/movie/MovieCard";
+import PropTypes from "prop-types";
 
 //https://api.themoviedb.org/3/movie/{movie_id}?api_key=1718e7ca64d06a5129a10f58a692999e
 const MovieDetailsPage = () => {
@@ -62,6 +63,10 @@ function MovieMeta(type = "credits") {
   const { data, error } = useSWR(tmdbAPI.getMovieInfos(type, movieId), fetcher);
   if (!data) return null;
 }
+
+MovieMeta.propTypes = {
+  type: PropTypes.string,
+};
 
 function MovieCredits() {
   const { movieId } = useParams();
