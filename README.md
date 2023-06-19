@@ -35,6 +35,6 @@
 
 <h4 align="center">Giao diện tìm kiếm phim</h4>
 
-![Interface moviedetail](./img/detailmovie.jpeg)
+![Interface moviedetail](./img/moviedetail.jpeg)
 
 <h4 align="center">Giao diện chi tiêt phim</h4>
