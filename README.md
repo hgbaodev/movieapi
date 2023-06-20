@@ -4,7 +4,7 @@
 
 | STT |    MSSV    |   Họ và tên   |
 | :-: | :--------: | :-----------: |
-|  2  | 3121410069 | Hoàng Gia Bảo |
+|  1  | 3121410069 | Hoàng Gia Bảo |
 
 ## Getting Started
 
