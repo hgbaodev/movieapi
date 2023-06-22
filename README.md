@@ -29,12 +29,12 @@
 
 ![Interface homepage](./img/homemovie.jpeg)
 
-<h4 align="center">Giao diện trang chủ</h4>
+<h3 align="center">Giao diện trang chủ</h3>
 
 ![Interface moviesearch](./img/searchmovie.jpeg)
 
-<h4 align="center">Giao diện tìm kiếm phim</h4>
+<h3 align="center">Giao diện tìm kiếm phim</h3>
 
 ![Interface moviedetail](./img/moviedetail.jpeg)
 
-<h4 align="center">Giao diện chi tiết phim</h4>
+<h3 align="center">Giao diện chi tiết phim</h3>
