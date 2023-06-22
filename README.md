@@ -37,4 +37,4 @@
 
 ![Interface moviedetail](./img/moviedetail.jpeg)
 
-<h4 align="center">Giao diện chi tiêt phim</h4>
+<h4 align="center">Giao diện chi tiết phim</h4>
