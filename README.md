@@ -22,6 +22,11 @@
 
 3. Run app
    ```bash
+   npm install
+   ```
+
+4. Run app
+   ```bash
    npm run dev
    ```
 
