@@ -1,12 +1,6 @@
 <!-- author: hgbaodev -->
 # WEB MOVIE
 
-### Members of the group
-
-| STT |    MSSV    |   Họ và tên   |
-| :-: | :--------: | :-----------: |
-|  1  | 3121410069 | Hoàng Gia Bảo |
-
 ## Getting Started
 
 1. Clone the repository:
